@@ -4,11 +4,12 @@ const { execFile, spawn } = require('child_process');
 const BUNDLE_ID = 'com.spotify.client';
 const NOTIFICATION = `${BUNDLE_ID}.PlaybackStateChanged`;
 
-// Long-running JXA process: listens for Spotify's distributed notification and
-// prints its userInfo as one JSON line per event. Replaces the
-// DistributedNotificationCenter observer of the Swift version.
+// Long-running JXA process, one JSON line per event:
+// - Spotify's playback distributed notification (its userInfo), as in the Swift version
+// - Spotify launching or quitting ({"app":"launched"|"terminated"}), which posts no playback notification
 const LISTENER_SCRIPT = `
 ObjC.import('Foundation');
+ObjC.import('AppKit');
 const out = $.NSFileHandle.fileHandleWithStandardOutput;
 const write = (s) => out.writeData($(s + '\\n').dataUsingEncoding($.NSUTF8StringEncoding));
 ObjC.registerSubclass({
@@ -17,12 +18,24 @@ ObjC.registerSubclass({
     'onChange:': {
       types: ['void', ['id']],
       implementation: function (n) { write(JSON.stringify(ObjC.deepUnwrap(n.userInfo) || {})); }
+    },
+    'onApp:': {
+      types: ['void', ['id']],
+      implementation: function (n) {
+        const app = n.userInfo.objectForKey('NSWorkspaceApplicationKey');
+        if (ObjC.unwrap(app.bundleIdentifier) !== '${BUNDLE_ID}') return;
+        const launched = ObjC.unwrap(n.name) === 'NSWorkspaceDidLaunchApplicationNotification';
+        write(JSON.stringify({ app: launched ? 'launched' : 'terminated' }));
+      }
     }
   }
 });
 const observer = $.SnowflakeObserver.alloc.init;
 $.NSDistributedNotificationCenter.defaultCenter
   .addObserverSelectorNameObject(observer, 'onChange:', '${NOTIFICATION}', $());
+const workspace = $.NSWorkspace.sharedWorkspace.notificationCenter;
+workspace.addObserverSelectorNameObject(observer, 'onApp:', 'NSWorkspaceDidLaunchApplicationNotification', $());
+workspace.addObserverSelectorNameObject(observer, 'onApp:', 'NSWorkspaceDidTerminateApplicationNotification', $());
 write('{"ready":true}');
 while (true) $.NSRunLoop.currentRunLoop.runUntilDate($.NSDate.dateWithTimeIntervalSinceNow(60));
 `;
@@ -128,11 +141,19 @@ class Spotify extends EventEmitter {
       return;
     }
     if (info.ready) return;
-    if (info['Player State'] === 'Stopped') {
+    if (info.app === 'terminated') {
       this.setState({ ...EMPTY_STATE });
-      return;
+    } else if (info.app === 'launched') {
+      // Spotify ignores scripting for a moment after launch; show it as running, then query
+      this.setState({ ...EMPTY_STATE, running: true });
+      setTimeout(() => this.refresh(), 2000);
+    } else if (info['Player State'] === 'Stopped') {
+      // Spotify may still be open: clear the track but let the query decide
+      this.setState({ ...EMPTY_STATE, running: this.state.running });
+      this.refresh();
+    } else {
+      this.refresh();
     }
-    this.refresh();
   }
 
   async refresh() {

@@ -14,7 +14,7 @@ Snowflake is a macOS menu bar app, built with Electron, that displays and contro
   <img src="Images/example.png" width="400">
 </p>
 
-The app shows the currently playing song in the menu bar. Clicking the menu bar item will present a window displaying details of the current track. Hovering over the album art gives you controls, and double-clicking it brings Spotify to the front.
+The app shows the currently playing song in the menu bar. Clicking the menu bar item will present a window displaying details of the current track. Hovering over the album art gives you controls, and double-clicking it brings Spotify to the front. When Spotify is closed, an "Open Spotify" button launches it.
 
 <p align="center">
   <img src="Images/miniplayer.png" width="368">

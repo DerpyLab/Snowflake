@@ -15,6 +15,7 @@ function render() {
   const showBackground = running && visualizerStyle === 'albumArt';
 
   $('idle').hidden = running;
+  renderIdle(player);
   $('player').hidden = !running;
   document.body.classList.toggle('artwork-background', showBackground);
   setImage($('background'), showBackground ? player.artworkUrl : '');
@@ -27,6 +28,7 @@ function render() {
 }
 
 bindCommandButtons();
+bindOpenSpotifyButton();
 bindOpenSpotifyOnDoubleClick(document.querySelector('.art'));
 
 // Always visible, so update the progress bar continuously (only while something plays)

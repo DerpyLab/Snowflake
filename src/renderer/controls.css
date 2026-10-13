@@ -69,6 +69,24 @@
   height: var(--play-icon-size, 20px);
 }
 
+/* Text button in the same style, e.g. "Open Spotify" */
+.neu-button {
+  padding: 9px 20px;
+  border: 0;
+  border-radius: 100px;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--neu-icon);
+  background: linear-gradient(145deg, var(--neu-top), var(--neu-bottom));
+  box-shadow:
+    -3px -3px 6px var(--neu-highlight),
+    3px 3px 7px var(--neu-shadow);
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.2s cubic-bezier(0.3, 1.6, 0.5, 1);
+}
+
+.neu-button:active,
 .controls button:active {
   transform: scale(0.95);
   box-shadow:

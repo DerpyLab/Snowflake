@@ -1,9 +1,16 @@
 /* Builds on popover.css: reuses its colors, blurred background and idle message */
 
 #idle {
+  flex-direction: row;
+  gap: 12px;
   font-size: 13px;
   font-weight: 600;
   padding: 0 16px;
+}
+
+#idle .neu-button {
+  font-size: 12px;
+  padding: 6px 14px;
 }
 
 #player {

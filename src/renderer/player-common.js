@@ -31,6 +31,18 @@ function setPlayPauseIcon(isPlaying) {
   document.getElementById('icon-pause').toggleAttribute('hidden', !isPlaying);
 }
 
+// Idle state: offer to open Spotify when it is closed, otherwise ask to play something
+function renderIdle(player) {
+  document.getElementById('idle-message').textContent = player.running
+    ? 'Play something on Spotify'
+    : 'Spotify is not running';
+  document.getElementById('open-spotify').hidden = player.running;
+}
+
+function bindOpenSpotifyButton() {
+  document.getElementById('open-spotify').addEventListener('click', () => window.snowflake.openSpotify());
+}
+
 function bindOpenSpotifyOnDoubleClick(element) {
   element.addEventListener('dblclick', (e) => {
     // Rapid clicks on the playback buttons overlaid on the artwork must not open Spotify
