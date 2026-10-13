@@ -26,7 +26,7 @@ If applicable, add screenshots to help explain your problem.
 **Infomation (please complete the following information):**
  - Machine: [e.g. M1 MacBook Air]
  - OS: [e.g. macOS 12.1]
- - Jukebox Version: [e.g. 0.9.5]
+ - Snowflake Version: [e.g. 1.0.0]
 
 **Additional context**
 Add any other context about the problem here.

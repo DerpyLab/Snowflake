@@ -1,0 +1,83 @@
+/* Builds on popover.css: reuses its colors, blurred background and idle message */
+
+#idle {
+  flex-direction: row;
+  gap: 12px;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 0 16px;
+}
+
+#idle .neu-button {
+  font-size: 12px;
+  padding: 6px 14px;
+}
+
+#player {
+  flex-direction: row;
+  justify-content: flex-start;
+  gap: 12px;
+  padding: 0 12px 0 0;
+}
+
+/* Full-height artwork flush with the left edge; the window's rounded corners clip it */
+.art {
+  height: 100%;
+  aspect-ratio: 1;
+  flex-shrink: 0;
+  background: var(--placeholder);
+}
+
+.art img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.info {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.info .title,
+.info .artist {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.info .title {
+  font-size: 13px;
+}
+
+.info .artist {
+  font-size: 11px;
+}
+
+.progress {
+  height: 3px;
+  margin-top: 7px;
+  border-radius: 2px;
+  background: var(--placeholder);
+  overflow: hidden;
+}
+
+#progress-bar {
+  width: 0;
+  height: 100%;
+  border-radius: 2px;
+  background: var(--fg-secondary);
+}
+
+.controls {
+  --controls-gap: 8px;
+  --button-size: 26px;
+  --play-size: 40px;
+  --icon-size: 10px;
+  --play-icon-size: 16px;
+  padding-right: 2px;
+}

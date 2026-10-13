@@ -1,0 +1,36 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'"
+    />
+    <title>Snowflake</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="onboarding.css" />
+  </head>
+  <body>
+    <aside class="drag">
+      <canvas id="warp"></canvas>
+      <div class="icon"><img src="assets/icon.png" alt="" width="128" height="128" /></div>
+    </aside>
+
+    <main>
+      <div class="content">
+        <p>
+          Snowflake requires permission to control Spotify and display music data.<br /><br />
+          Open Spotify and click 'Enable permissions' below and select OK in the alert that is presented.
+        </p>
+        <button id="enable">Enable permissions</button>
+      </div>
+      <footer>
+        <button id="quit">Quit</button>
+        <button id="continue" class="default" disabled>Continue</button>
+      </footer>
+    </main>
+
+    <script src="shader.js"></script>
+    <script src="onboarding.js"></script>
+  </body>
+</html>
