@@ -1,0 +1,40 @@
+{
+  "name": "snowflake",
+  "productName": "Snowflake",
+  "version": "1.0.0",
+  "description": "Display and control the currently playing Spotify track from the macOS menu bar",
+  "main": "src/main/main.js",
+  "private": true,
+  "license": "MIT",
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder --mac"
+  },
+  "devDependencies": {
+    "electron": "^44.7.0",
+    "electron-builder": "^26.15.3"
+  },
+  "build": {
+    "appId": "io.github.derpylab.snowflake",
+    "productName": "Snowflake",
+    "files": [
+      "src/**/*",
+      "package.json"
+    ],
+    "mac": {
+      "category": "public.app-category.music",
+      "icon": "build/icon.png",
+      "target": [
+        "dmg",
+        "zip"
+      ],
+      "hardenedRuntime": true,
+      "entitlements": "build/entitlements.mac.plist",
+      "entitlementsInherit": "build/entitlements.mac.plist",
+      "extendInfo": {
+        "LSUIElement": true,
+        "NSAppleEventsUsageDescription": "Snowflake needs to control Spotify to display and control the currently playing track."
+      }
+    }
+  }
+}

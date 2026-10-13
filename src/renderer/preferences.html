@@ -1,0 +1,54 @@
+<!doctype html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src 'self'; img-src 'self'; style-src 'self'; script-src 'self'"
+    />
+    <title>Preferences</title>
+    <link rel="stylesheet" href="base.css" />
+    <link rel="stylesheet" href="preferences.css" />
+  </head>
+  <body>
+    <header class="drag">
+      <img src="assets/icon.png" alt="" width="40" height="40" />
+      <div>
+        <div class="name">Snowflake</div>
+        <div class="version" id="version"></div>
+      </div>
+      <nav class="no-drag">
+        <a href="#" data-link="repo">GitHub</a>
+      </nav>
+    </header>
+
+    <section>
+      <h2>General</h2>
+      <label class="row">
+        <input type="checkbox" id="launch-at-login" />
+        Launch at login
+      </label>
+      <label class="row">
+        <input type="checkbox" id="mini-player" />
+        Show mini player
+      </label>
+      <div class="row">
+        <span>Spotify permissions</span>
+        <button id="check-permission">Check…</button>
+      </div>
+    </section>
+
+    <section>
+      <h2>Background</h2>
+      <label class="row">
+        Style
+        <select id="visualizer-style">
+          <option value="none">None</option>
+          <option value="albumArt">Artwork</option>
+        </select>
+      </label>
+    </section>
+
+    <script src="preferences.js"></script>
+  </body>
+</html>

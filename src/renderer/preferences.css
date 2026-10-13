@@ -1,0 +1,54 @@
+body {
+  background: Canvas;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  height: 60px;
+  padding: 0 18px 0 84px;
+  border-bottom: 1px solid var(--divider);
+}
+
+.name {
+  font-weight: 600;
+}
+
+.version {
+  font-size: 11px;
+  color: var(--fg-secondary);
+}
+
+nav {
+  margin-left: auto;
+  display: flex;
+  gap: 10px;
+  font-size: 12px;
+}
+
+nav a {
+  color: LinkText;
+  text-decoration: none;
+}
+
+section {
+  padding: 12px 16px;
+}
+
+section + section {
+  border-top: 1px solid var(--divider);
+}
+
+h2 {
+  margin: 0 0 6px;
+  font-size: 17px;
+  font-weight: 600;
+}
+
+.row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 24px;
+}
